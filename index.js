@@ -31,40 +31,39 @@ let continueGame = false;
 const game = () => {
   const computerAction = computerPlay();
 
-  let playerAction = prompt(
-    `Please select one of ${arrayOfActions.join(", ")}`,
-    "Rock"
+  let playerActionValue = prompt(
+    `Please select one of ${arrayOfActions.join(", ")}`
   );
 
-  if (playerAction) {
-    playerAction =
-      playerAction[0].toUpperCase() + playerAction.slice(1).toLowerCase();
+  if (playerActionValue) {
+    playerActionValue = playerActionValue.trim().toLowerCase();
 
-    switch (playerAction) {
-      case "Rock":
-        computerAction === "Paper"
-          ? playerState.setGames(loseMessage(playerAction, computerAction))
-          : computerAction === "Scissors"
-          ? playerState.setPoints(winMessage(playerAction, computerAction))
-          : playerState.setGames(drawMessage());
-        break;
-      case "Paper":
-        computerAction === "Paper"
-          ? playerState.setGames(drawMessage())
-          : computerAction === "Scissors"
-          ? playerState.setGames(loseMessage(playerAction, computerAction))
-          : playerState.setPoints(winMessage(playerAction, computerAction));
-        break;
+    const playerAction =
+      playerActionValue[0].toUpperCase() + playerActionValue.slice(1);
 
-      case "Scissors":
-        computerAction === "Paper"
-          ? playerState.setPoints(winMessage(playerAction, computerAction))
-          : computerAction === "Scissors"
-          ? playerState.setGames(drawMessage())
-          : playerState.setGames(loseMessage(playerAction, computerAction));
-        break;
-      default:
-        alert("You have entered incorrect value");
+    if (playerAction === computerAction) {
+      playerState.setGames(drawMessage());
+    } else {
+      switch (playerAction) {
+        case "Rock":
+          computerAction === "Paper"
+            ? playerState.setGames(loseMessage(playerAction, computerAction))
+            : playerState.setPoints(winMessage(playerAction, computerAction));
+          break;
+        case "Paper":
+          computerAction === "Scissors"
+            ? playerState.setGames(loseMessage(playerAction, computerAction))
+            : playerState.setPoints(winMessage(playerAction, computerAction));
+          break;
+
+        case "Scissors":
+          computerAction === "Rock"
+            ? playerState.setGames(loseMessage(playerAction, computerAction))
+            : playerState.setPoints(winMessage(playerAction, computerAction));
+          break;
+        default:
+          alert("You have entered incorrect value");
+      }
     }
   }
   continueGame = confirm("Do you want try again?");
