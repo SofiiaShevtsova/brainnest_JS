@@ -55,7 +55,6 @@ const game = () => {
             ? playerState.setGames(loseMessage(playerAction, computerAction))
             : playerState.setPoints(winMessage(playerAction, computerAction));
           break;
-
         case "Scissors":
           computerAction === "Rock"
             ? playerState.setGames(loseMessage(playerAction, computerAction))
@@ -70,11 +69,8 @@ const game = () => {
 };
 
 const start = confirm("Do you want play?");
-
 start && game();
 
-while (continueGame) {
-  game();
-}
+while (continueGame) game();
 
 !continueGame && alert("Good luck you! See you soon!)))");
