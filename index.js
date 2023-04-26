@@ -1,14 +1,14 @@
 const arrayOfActions = ["Rock", "Paper", "Scissors"];
-const userState = {
+const playerState = {
   games: 0,
   points: 0,
   setGames(message) {
     this.games = this.games + 1;
     alert(
       message +
-        ` You played ${userState.games} ${
-          userState.games === 1 ? "game" : "games"
-        } and won ${userState.points}.`
+        ` You played ${this.games} ${
+          this.games === 1 ? "game" : "games"
+        } and won ${this.points}.`
     );
   },
   setPoints(message) {
@@ -17,19 +17,16 @@ const userState = {
   },
 };
 
-let continueGame = false;
-
 const winMessage = (playerAction, computerAction) =>
   `You Win! ${playerAction} beats ${computerAction}.`;
 const loseMessage = (playerAction, computerAction) =>
   `You Lose! ${computerAction} beats ${playerAction}.`;
 const drawMessage = () => `Hahaha! Nobody won)))`;
 
-const computerPlay = () => {
-  const computerAction =
-    arrayOfActions[Math.floor(Math.random() * arrayOfActions.length)];
-  return computerAction;
-};
+const computerPlay = () =>
+  arrayOfActions[Math.floor(Math.random() * arrayOfActions.length)];
+
+let continueGame = false;
 
 const game = () => {
   const computerAction = computerPlay();
@@ -46,25 +43,25 @@ const game = () => {
     switch (playerAction) {
       case "Rock":
         computerAction === "Paper"
-          ? userState.setGames(loseMessage(playerAction, computerAction))
+          ? playerState.setGames(loseMessage(playerAction, computerAction))
           : computerAction === "Scissors"
-          ? userState.setPoints(winMessage(playerAction, computerAction))
-          : userState.setGames(drawMessage());
+          ? playerState.setPoints(winMessage(playerAction, computerAction))
+          : playerState.setGames(drawMessage());
         break;
       case "Paper":
         computerAction === "Paper"
-          ? userState.setGames(drawMessage()) 
+          ? playerState.setGames(drawMessage())
           : computerAction === "Scissors"
-          ? userState.setGames(loseMessage(playerAction, computerAction)) 
-          : userState.setPoints(winMessage(playerAction, computerAction)) ;
+          ? playerState.setGames(loseMessage(playerAction, computerAction))
+          : playerState.setPoints(winMessage(playerAction, computerAction));
         break;
 
       case "Scissors":
         computerAction === "Paper"
-          ? userState.setPoints(winMessage(playerAction, computerAction)) 
+          ? playerState.setPoints(winMessage(playerAction, computerAction))
           : computerAction === "Scissors"
-          ? userState.setGames(drawMessage()) 
-          : userState.setGames(loseMessage(playerAction, computerAction)) ;
+          ? playerState.setGames(drawMessage())
+          : playerState.setGames(loseMessage(playerAction, computerAction));
         break;
       default:
         alert("You have entered incorrect value");
@@ -73,10 +70,12 @@ const game = () => {
   continueGame = confirm("Do you want try again?");
 };
 
-confirm("Do you want play?") && game ()
+const start = confirm("Do you want play?");
+
+start && game();
 
 while (continueGame) {
-  game()
+  game();
 }
 
 !continueGame && alert("Good luck you! See you soon!)))");
