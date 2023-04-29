@@ -23,17 +23,16 @@ const loseMessage = (playerAction, computerAction) =>
   `You Lose! ${computerAction} beats ${playerAction}.`;
 const drawMessage = () => `Hahaha! Nobody won)))`;
 
+let continueGame = false;
 const computerPlay = () =>
   arrayOfActions[Math.round(Math.random() * arrayOfActions.length)];
 
-let continueGame = false;
+ let playerActionValue = prompt(
+    `Please select one of ${arrayOfActions.join(", ")}`
+  );
 
 const game = () => {
   const computerAction = computerPlay();
-
-  let playerActionValue = prompt(
-    `Please select one of ${arrayOfActions.join(", ")}`
-  );
 
   if (playerActionValue) {
     playerActionValue = playerActionValue.trim().toLowerCase();
