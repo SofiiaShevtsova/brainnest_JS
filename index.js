@@ -77,11 +77,9 @@ const game = () => {
 
   if (playerState.games % 5 === 0) {
     alert(
-      `${
         playerState.games - playerState.points < playerState.points
-          ? "You played 5 rounds and won!!!"
-          : "You played 5 rounds and lose!!!"
-      }`
+          ? `You played ${playerState.games} rounds and won!!!`
+          : `You played ${playerState.games} rounds and lose!!!`
     );
 
     continueGame = confirm("Do you want try again?");
