@@ -101,3 +101,4 @@ start ? game() : (continueGame = false);
 while (continueGame) game();
 
 !continueGame && alert("Good luck you! See you soon!)))");
+
