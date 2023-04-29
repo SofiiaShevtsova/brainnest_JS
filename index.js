@@ -34,7 +34,6 @@ const computerPlay = () =>
 const game = () => {
   const computerAction = computerPlay();
 
-  if (playerActionValue) {
     playerActionValue = playerActionValue.trim().toLowerCase();
 
     const playerAction =
@@ -63,13 +62,12 @@ const game = () => {
           alert("You have entered incorrect value");
       }
     }
-  }
   continueGame = confirm("Do you want try again?");
 };
 
 const start = confirm("Do you want play?");
-start && game();
+(start && playerActionValue) && game();
 
-while (continueGame) game();
+while (continueGame && playerActionValue) game();
 
 !continueGame && alert("Good luck you! See you soon!)))");
