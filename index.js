@@ -18,13 +18,13 @@ const playerState = {
   },
 };
 
+let continueGame = true;
+
 const winMessage = (playerAction, computerAction) =>
   `You Win! ${playerAction} beats ${computerAction}.`;
 const loseMessage = (playerAction, computerAction) =>
   `You Lose! ${computerAction} beats ${playerAction}.`;
 const drawMessage = () => `Hahaha! Nobody won)))`;
-
-let continueGame = true;
 
 const computerPlay = () =>
   arrayOfActions[Math.round(Math.random() * arrayOfActions.length)];
