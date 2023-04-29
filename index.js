@@ -23,17 +23,19 @@ const loseMessage = (playerAction, computerAction) =>
   `You Lose! ${computerAction} beats ${playerAction}.`;
 const drawMessage = () => `Hahaha! Nobody won)))`;
 
-let continueGame = false;
 const computerPlay = () =>
   arrayOfActions[Math.round(Math.random() * arrayOfActions.length)];
 
- let playerActionValue = prompt(
-    `Please select one of ${arrayOfActions.join(", ")}`
-  );
+let continueGame = false;
 
 const game = () => {
   const computerAction = computerPlay();
 
+  let playerActionValue = prompt(
+    `Please select one of ${arrayOfActions.join(", ")}`
+  );
+
+  if (playerActionValue) {
     playerActionValue = playerActionValue.trim().toLowerCase();
 
     const playerAction =
@@ -62,12 +64,14 @@ const game = () => {
           alert("You have entered incorrect value");
       }
     }
+  }
   continueGame = confirm("Do you want try again?");
 };
 
 const start = confirm("Do you want play?");
-(start && playerActionValue) && game();
+start && game();
 
-while (continueGame && playerActionValue) game();
+while (continueGame) game();
 
 !continueGame && alert("Good luck you! See you soon!)))");
+
