@@ -24,7 +24,7 @@ const loseMessage = (playerAction, computerAction) =>
 const drawMessage = () => `Hahaha! Nobody won)))`;
 
 const computerPlay = () =>
-  arrayOfActions[Math.floor(Math.random() * arrayOfActions.length)];
+  arrayOfActions[Math.round(Math.random() * arrayOfActions.length)];
 
 let continueGame = false;
 
