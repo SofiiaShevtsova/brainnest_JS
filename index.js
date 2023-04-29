@@ -1,4 +1,5 @@
 const arrayOfActions = ["Rock", "Paper", "Scissors"];
+
 const playerState = {
   games: 0,
   points: 0,
@@ -23,53 +24,79 @@ const loseMessage = (playerAction, computerAction) =>
   `You Lose! ${computerAction} beats ${playerAction}.`;
 const drawMessage = () => `Hahaha! Nobody won)))`;
 
+let continueGame = true;
+
 const computerPlay = () =>
-  arrayOfActions[Math.floor(Math.random() * arrayOfActions.length)];
+  arrayOfActions[Math.round(Math.random() * arrayOfActions.length)];
 
-let continueGame = false;
-
-const game = () => {
-  const computerAction = computerPlay();
-
+const playerChoice = () => {
   let playerActionValue = prompt(
     `Please select one of ${arrayOfActions.join(", ")}`
   );
 
-  if (playerActionValue) {
-    playerActionValue = playerActionValue.trim().toLowerCase();
+  playerActionValue ? playerActionValue.trim().toLowerCase() : null;
 
-    const playerAction =
-      playerActionValue[0].toUpperCase() + playerActionValue.slice(1);
+  return (
+    playerActionValue &&
+    playerActionValue[0].toUpperCase() + playerActionValue.slice(1)
+  );
+};
 
-    if (playerAction === computerAction) {
-      playerState.setGames(drawMessage());
-    } else {
-      switch (playerAction) {
-        case "Rock":
-          computerAction === "Paper"
-            ? playerState.setGames(loseMessage(playerAction, computerAction))
-            : playerState.setPoints(winMessage(playerAction, computerAction));
-          break;
-        case "Paper":
-          computerAction === "Scissors"
-            ? playerState.setGames(loseMessage(playerAction, computerAction))
-            : playerState.setPoints(winMessage(playerAction, computerAction));
-          break;
-        case "Scissors":
-          computerAction === "Rock"
-            ? playerState.setGames(loseMessage(playerAction, computerAction))
-            : playerState.setPoints(winMessage(playerAction, computerAction));
-          break;
-        default:
-          alert("You have entered incorrect value");
-      }
+const game = () => {
+  const computerAction = computerPlay();
+  const playerAction = playerChoice();
+
+  if (playerAction === computerAction) {
+    playerState.setGames(drawMessage());
+  } else {
+    switch (playerAction) {
+      case "Rock":
+        computerAction === "Paper"
+          ? playerState.setGames(loseMessage(playerAction, computerAction))
+          : playerState.setPoints(winMessage(playerAction, computerAction));
+        break;
+      case "Paper":
+        computerAction === "Scissors"
+          ? playerState.setGames(loseMessage(playerAction, computerAction))
+          : playerState.setPoints(winMessage(playerAction, computerAction));
+        break;
+      case "Scissors":
+        computerAction === "Rock"
+          ? playerState.setGames(loseMessage(playerAction, computerAction))
+          : playerState.setPoints(winMessage(playerAction, computerAction));
+        break;
+      case null:
+        confirm("Do you want stop?")
+          ? (continueGame = false)
+          : (continueGame = true);
+        break;
+      default:
+        alert("You have entered incorrect value");
     }
   }
-  continueGame = confirm("Do you want try again?");
+
+  if (playerState.games % 5 === 0) {
+    alert(
+      `${
+        playerState.games - playerState.points < playerState.points
+          ? "You played 5 rounds and won!!!"
+          : "You played 5 rounds and lose!!!"
+      }`
+    );
+
+    continueGame = confirm("Do you want try again?");
+
+    const setUserPoints =
+      continueGame && confirm("Do you want delete your score?");
+    if (setUserPoints) {
+      playerState.games = 0;
+      playerState.points = 0;
+    }
+  }
 };
 
 const start = confirm("Do you want play?");
-start && game();
+start ? game() : (continueGame = false);
 
 while (continueGame) game();
 
