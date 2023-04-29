@@ -33,9 +33,7 @@ const playerChoice = () => {
   let playerActionValue = prompt(
     `Please select one of ${arrayOfActions.join(", ")}`
   );
-
-  playerActionValue ? playerActionValue.trim().toLowerCase() : null;
-
+  playerActionValue = playerActionValue ? playerActionValue.trim().toLowerCase() : null;
   return (
     playerActionValue &&
     playerActionValue[0].toUpperCase() + playerActionValue.slice(1)
@@ -77,9 +75,9 @@ const game = () => {
 
   if (playerState.games % 5 === 0) {
     alert(
-        playerState.games - playerState.points < playerState.points
-          ? `You played ${playerState.games} rounds and won!!!`
-          : `You played ${playerState.games} rounds and lose!!!`
+      playerState.games - playerState.points < playerState.points
+        ? `You played ${playerState.games} rounds and won!!!`
+        : `You played ${playerState.games} rounds and lose!!!`
     );
 
     continueGame = confirm("Do you want try again?");
@@ -99,4 +97,3 @@ start ? game() : (continueGame = false);
 while (continueGame) game();
 
 !continueGame && alert("Good luck you! See you soon!)))");
-
