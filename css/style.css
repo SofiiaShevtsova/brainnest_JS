@@ -1,0 +1,104 @@
+:root {
+  --main-text-color: rgba(10, 50, 10, 1);
+}
+
+body {
+  background-color: rgba(150, 150, 0, 0.5);
+  color: var(--main-text-color);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid rgba(10, 50, 10, 1);
+}
+
+header > a {
+  color: inherit;
+  font-size: 24px;
+  font-weight: 500;
+  transition: all 0.5s linear;
+}
+
+header > a:hover {
+  color: rgb(255, 20, 20);
+  transform: scale(1.2);
+}
+
+main {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start__title {
+  font-size: 34px;
+}
+.game-field {
+  margin: 30px auto 0;
+}
+.game-field__points {
+  font-size: 20px;
+}
+.game-field__round {
+  font-size: 30px;
+}
+.player-choice {
+  padding: 40px;
+  display: flex;
+  gap: 40px;
+  background-color: rgba(150, 150, 0, 0.3);
+  border-radius: 20px;
+  border: 2px solid var(--main-text-color);
+}
+
+.player-choice > legend {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.player-choice > button {
+  padding: 10px 0;
+  width: 100px;
+  background-color: var(--main-text-color);
+  color: aliceblue;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s linear;
+}
+
+.player-choice > button:hover {
+  background-color: rgb(255, 20, 20);
+  transform: scale(1.2);
+}
+
+.result-game {
+  visibility: hidden;
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(20, 20, 20, 0.9);
+}
+.result-game.open {
+  visibility: visible;
+  top: 0;
+  left: 0;
+}
+.result-game > p {
+  color: rgb(255, 20, 20);
+  font-size: 24px;
+  font-weight: 600;
+}
