@@ -44,15 +44,15 @@ const addBtn = () => {
 };
 
 const winMessage = (playerAction, computerAction) => {
-  result.innerHTML = `<p>You Win! ${playerAction} beats ${computerAction}.</p>`;
+  result.innerHTML = `<p class="win">You Win! ${playerAction} beats ${computerAction}.</p>`;
   playerState.setPoints();
 };
 const loseMessage = (playerAction, computerAction) => {
-  result.innerHTML = `<p>You Lose! ${computerAction} beats ${playerAction}.</p>`;
+  result.innerHTML = `<p class="lose">You Lose! ${computerAction} beats ${playerAction}.</p>`;
   playerState.setGames();
 };
 const drawMessage = () => {
-  result.innerHTML = `<p>Hahaha! Nobody won)))</p>`;
+  result.innerHTML = `<p class="lose">Hahaha! Nobody won)))</p>`;
   playerState.setGames();
 };
 
@@ -87,8 +87,8 @@ const game = (playerAction) => {
   if (playerState.games === 5) {
     result.innerHTML =
       playerState.games - playerState.points < playerState.points
-        ? `${result.innerHTML}<p>You played ${playerState.games} rounds and won!!!</p>`
-        : `${result.innerHTML}<p>You played ${playerState.games} rounds and lose!!!</p>`;
+        ? `${result.innerHTML}<p class="win">You played ${playerState.games} rounds and won!!!</p>`
+        : `${result.innerHTML}<p class="lose">You played ${playerState.games} rounds and lose!!!</p>`;
     playerState.setState();
   }
   result.classList.add("open");

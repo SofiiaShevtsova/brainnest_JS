@@ -101,7 +101,12 @@ main {
   left: 0;
 }
 .result-game > p {
-  color: rgb(255, 20, 20);
   font-size: 24px;
   font-weight: 600;
+}
+.result-game > p.win {
+  color: green;
+}
+.result-game > p.lose {
+  color: red;
 }
