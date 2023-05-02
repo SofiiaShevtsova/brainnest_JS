@@ -27,9 +27,12 @@ const showRound = () => {
 };
 
 const showPoints = () => {
-  points.textContent = playerState.games !== 0 ? `You played ${playerState.games} ${
-    playerState.games === 1 ? "game" : "games"
-  } and won ${playerState.points}.`: ''
+  points.textContent =
+    playerState.games !== 0
+      ? `You played ${playerState.games} ${
+          playerState.games === 1 ? "game" : "games"
+        } and won ${playerState.points}.`
+      : "";
 };
 
 const addBtn = () => {
@@ -84,11 +87,11 @@ const game = (playerAction) => {
   if (playerState.games === 5) {
     result.innerHTML =
       playerState.games - playerState.points < playerState.points
-        ? `<p>You played ${playerState.games} rounds and won!!!</p>`
-        : `<p>You played ${playerState.games} rounds and lose!!!</p>`;
+        ? `${result.innerHTML}<p>You played ${playerState.games} rounds and won!!!</p>`
+        : `${result.innerHTML}<p>You played ${playerState.games} rounds and lose!!!</p>`;
     playerState.setState();
   }
-  result.classList.add('open')
+  result.classList.add("open");
 };
 
 const playerChoice = (e) => {
@@ -106,5 +109,5 @@ addBtn();
 
 btnField.addEventListener("click", playerChoice);
 result.addEventListener("click", () => {
-  result.classList.remove("open")
-})
+  result.classList.remove("open");
+});
