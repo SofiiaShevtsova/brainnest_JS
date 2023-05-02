@@ -49,9 +49,10 @@ main {
   font-size: 30px;
 }
 .player-choice {
-  padding: 40px;
+  width: 90vw;
+  padding: 10vw;
   display: flex;
-  gap: 40px;
+  gap: 10%;
   background-color: rgba(150, 150, 0, 0.3);
   border-radius: 20px;
   border: 2px solid var(--main-text-color);
@@ -64,7 +65,7 @@ main {
 
 .player-choice > button {
   padding: 10px 0;
-  width: 100px;
+  width: 20vw;
   background-color: var(--main-text-color);
   color: aliceblue;
   font-size: 20px;
