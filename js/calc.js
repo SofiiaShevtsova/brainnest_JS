@@ -94,7 +94,9 @@ const backspace = () => {
 };
 
 const showResult = () => {
-  countState.setNum(calkOutput.textContent.split(`${countState.operator}`)[1]);
+  const array = calkOutput.textContent.split(`${countState.operator}`)
+  const num = array.length === 2? array[1]: array[2]
+  countState.setNum(num);
   countState.setResult(
     count(countState.result, countState.num, countState.operator)
   );
@@ -110,7 +112,7 @@ const showOutput = (value) => {
   calkOutput.textContent = `${calkOutput.textContent}${value}`;
 };
 
-const showCalcOutput = (e) => {
+const createCalcOutput = (e) => {
   if (e.target.type === "button") {
     const value = e.target.id;
 
@@ -162,4 +164,4 @@ const addCalcBtn = () => {
 
 addCalcBtn();
 
-calcTable.addEventListener("click", showCalcOutput);
+calcTable.addEventListener("click", createCalcOutput);
