@@ -21,10 +21,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   flex-wrap: wrap;
   padding: 20px 50px;
   margin-bottom: 30px;
   border-bottom: 2px solid rgba(10, 50, 10, 1);
+  font-size: 24px;
 }
 
 header > a {
@@ -166,4 +168,14 @@ main {
 .calcutor__btn:disabled {
   background-color: red;
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 400px) {
+  header {
+    padding: 20px 10px;
+    font-size: 20px;
+  }
+  .player-choice > button {
+    font-size: 14px;
+  }
 }
