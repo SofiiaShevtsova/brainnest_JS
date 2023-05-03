@@ -7,6 +7,16 @@ body {
   color: var(--main-text-color);
 }
 
+ul,
+li,
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -35,6 +45,10 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.start {
+  padding: 30px;
 }
 
 .start__title {
@@ -109,4 +123,47 @@ main {
 }
 .result-game > p.lose {
   color: red;
+}
+
+.calkulator {
+  margin: 20px auto 0;
+}
+
+.calculator__output {
+  margin: 0 auto 30px;
+  padding: 10px;
+  width: 70%;
+  min-height: 50px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 30px;
+  text-align: end;
+}
+
+.calcutor__list-btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+}
+
+.calcutor__list-btn > li {
+  width: 20%;
+}
+
+.calcutor__btn {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid black;
+  color: inherit;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.calcutor__btn:disabled {
+  background-color: red;
+  cursor: not-allowed;
 }
