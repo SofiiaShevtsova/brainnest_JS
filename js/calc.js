@@ -98,6 +98,9 @@ const choiceOperator = (value) => {
 };
 
 const addPoint = () => {
+  if (document.querySelector("#point").hasAttribute("disabled")) {
+    return;
+  }
   if (
     !calkOutput.textContent ||
     isNaN(+calkOutput.textContent[calkOutput.textContent.length - 1])
@@ -130,14 +133,16 @@ const backspace = () => {
 };
 
 const showResult = () => {
-  const array = calkOutput.textContent.split(`${countState.operator}`);
-  const num = array.length === 2 ? array[1] : array[2];
-  countState.setNum(num);
-  countState.setResult(
-    count(countState.result, countState.num, countState.operator)
-  );
-  calkOutput.textContent = `${countState.result}`;
-  removeDisabled("point");
+  if (calkOutput.textContent && isNaN(+calkOutput.textContent)) {
+    const array = calkOutput.textContent.split(`${countState.operator}`);
+    const num = array.length === 2 ? array[1] : array[2];
+    countState.setNum(num);
+    countState.setResult(
+      count(countState.result, countState.num, countState.operator)
+    );
+    calkOutput.textContent = `${countState.result}`;
+    removeDisabled("point");
+  }
 };
 
 const showError = () => {
