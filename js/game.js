@@ -55,6 +55,12 @@ const drawMessage = () => {
   result.innerHTML = `<p class="lose">Hahaha! Nobody won)))</p>`;
   playerState.setGames();
 };
+const resultMessage = () => {
+  result.innerHTML =
+    playerState.games - playerState.points < playerState.points
+      ? `${result.innerHTML}<p class="win">You played ${playerState.games} rounds and won!!!</p>`
+      : `${result.innerHTML}<p class="lose">You played ${playerState.games} rounds and lose!!!</p>`;
+};
 
 const computerPlay = () =>
   arrayOfActions[Math.floor(Math.random() * arrayOfActions.length)];
@@ -83,12 +89,8 @@ const game = (playerAction) => {
         break;
     }
   }
-
   if (playerState.games === 5) {
-    result.innerHTML =
-      playerState.games - playerState.points < playerState.points
-        ? `${result.innerHTML}<p class="win">You played ${playerState.games} rounds and won!!!</p>`
-        : `${result.innerHTML}<p class="lose">You played ${playerState.games} rounds and lose!!!</p>`;
+    resultMessage();
     playerState.setState();
   }
   result.classList.add("open");

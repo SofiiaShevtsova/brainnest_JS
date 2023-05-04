@@ -42,7 +42,6 @@ const countState = {
     this.operator = "";
   },
 };
-const { result, num, operator } = countState;
 
 const addNumder = (num1, num2) =>
   (+num1 + +num2).toFixed((+num1 + +num2) % 1 === 0 ? 0 : 2);
@@ -54,7 +53,7 @@ const divideNumber = (num1, num2) => {
   if (+num2 === 0) {
     errorMessage.textContent = "Сannot be divided by 0";
     showError();
-    return result;
+    return countState.result;
   } else {
     return (num1 / num2).toFixed((num1 / num2) % 1 === 0 ? 0 : 2);
   }
@@ -85,7 +84,7 @@ const choiceOperator = (value) => {
       )}`;
       showOutput(value);
     } else {
-      if (result !== 0) {
+      if (countState.result !== 0) {
         showResult();
         removeDisabled("point");
       } else {
@@ -120,7 +119,10 @@ const clearAll = () => {
 };
 
 const backspace = () => {
-  if (calkOutput.textContent[calkOutput.textContent.length - 1] === operator) {
+  if (
+    calkOutput.textContent[calkOutput.textContent.length - 1] ===
+    countState.operator
+  ) {
     document.querySelector("#C").setAttribute("disabled", "");
   } else {
     calkOutput.textContent = `${calkOutput.textContent.slice(
@@ -132,11 +134,13 @@ const backspace = () => {
 
 const showResult = () => {
   if (calkOutput.textContent && isNaN(+calkOutput.textContent)) {
-    const array = calkOutput.textContent.split(`${operator}`);
+    const array = calkOutput.textContent.split(`${countState.operator}`);
     const num = array.length === 2 ? array[1] : array[2];
     countState.setNum(num);
-    countState.setResult(count(result, num, operator));
-    calkOutput.textContent = `${result}`;
+    countState.setResult(
+      count(countState.result, countState.num, countState.operator)
+    );
+    calkOutput.textContent = `${countState.result}`;
     removeDisabled("point");
   }
 };
