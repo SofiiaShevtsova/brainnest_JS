@@ -47,9 +47,15 @@ const addNumder = (num1, num2) =>
   (+num1 + +num2).toFixed((+num1 + +num2) % 1 === 0 ? 0 : 2);
 const subtractNumber = (num1, num2) =>
   (num1 - num2).toFixed((num1 - num2) % 1 === 0 ? 0 : 2);
-const multiplyNumder = (num1, num2) =>
-  (num1 * num2).toFixed((num1 * num2) % 1 === 0 ? 0 : 2);
+const multiplyNumder = (num1, num2 = 1) =>
+  num2 === ""
+    ? countState.result
+    : (num1 * num2).toFixed((num1 * num2) % 1 === 0 ? 0 : 2);
 const divideNumber = (num1, num2) => {
+  if (num2 === "") {
+    return countState.result;
+  }
+  console.dir(num2 === "");
   if (+num2 === 0) {
     errorMessage.textContent = "Сannot be divided by 0";
     showError();
