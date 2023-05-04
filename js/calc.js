@@ -186,7 +186,10 @@ const createCalcOutput = (e) => {
           showResult();
           countState.setState();
           break;
-
+        case "Enter":
+          showResult();
+          countState.setState();
+          break;
         default:
           choiceOperator(value);
           break;
