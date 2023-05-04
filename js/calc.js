@@ -70,7 +70,7 @@ const count = (num1, num2, operator) => {
 
 const addPoint = () => {
   if (
-    !text ||
+    !calkOutput.textContent ||
     isNaN(+calkOutput.textContent[calkOutput.textContent.length - 1])
   ) {
     document.querySelector("#point").setAttribute("disabled", "");
@@ -87,25 +87,32 @@ const clearAll = () => {
 };
 
 const backspace = () => {
-  calkOutput.textContent = `${calkOutput.textContent.slice(
-    0,
-    calkOutput.textContent.length - 1
-  )}`;
+  if (
+    calkOutput.textContent[calkOutput.textContent.length - 1] ===
+    countState.operator
+  ) {
+    document.querySelector("#C").setAttribute("disabled", "");
+  } else {
+    calkOutput.textContent = `${calkOutput.textContent.slice(
+      0,
+      calkOutput.textContent.length - 1
+    )}`;
+  }
 };
 
 const showResult = () => {
-  const array = calkOutput.textContent.split(`${countState.operator}`)
-  const num = array.length === 2? array[1]: array[2]
+  const array = calkOutput.textContent.split(`${countState.operator}`);
+  const num = array.length === 2 ? array[1] : array[2];
   countState.setNum(num);
   countState.setResult(
     count(countState.result, countState.num, countState.operator)
   );
   calkOutput.textContent = `${countState.result}`;
-  removeDisabled();
+  removeDisabled("point");
 };
 
-const removeDisabled = () => {
-  document.querySelector("#point").removeAttribute("disabled", "");
+const removeDisabled = (id) => {
+  document.querySelector(`#${id}`).removeAttribute("disabled", "");
 };
 
 const showOutput = (value) => {
@@ -113,8 +120,9 @@ const showOutput = (value) => {
 };
 
 const createCalcOutput = (e) => {
-  if (e.target.type === "button") {
-    const value = e.target.id;
+  if (e.target.type === "button" || e.key) {
+    const value = e.target.id || e.key;
+    removeDisabled("C");
 
     if (isNaN(+value)) {
       switch (value) {
@@ -127,22 +135,28 @@ const createCalcOutput = (e) => {
         case "C":
           backspace();
           break;
+        case "Backspace":
+          backspace();
+          break;
+
         case "=":
           showResult();
           countState.setState();
           break;
 
         default:
-          if (countState.result !== 0) {
-            showResult();
-            removeDisabled();
-          } else {
-            countState.setResult(+calkOutput.textContent);
-            removeDisabled();
+          if (arrayForCalculator.includes(value)) {
+            if (countState.result !== 0) {
+              showResult();
+              removeDisabled("point");
+            } else {
+              countState.setResult(+calkOutput.textContent);
+              removeDisabled("point");
+            }
+            countState.setOperator(value);
+            showOutput(value);
+            break;
           }
-          countState.setOperator(value);
-          showOutput(value);
-          break;
       }
     } else {
       showOutput(value);
@@ -165,3 +179,4 @@ const addCalcBtn = () => {
 addCalcBtn();
 
 calcTable.addEventListener("click", createCalcOutput);
+document.addEventListener("keydown", createCalcOutput);
