@@ -121,7 +121,7 @@ const showOutput = (value) => {
 
 const createCalcOutput = (e) => {
   if (e.target.type === "button" || e.key) {
-    const value = e.target.id || e.key;
+    const value = e.key || e.target.id;
     removeDisabled("C");
 
     if (isNaN(+value)) {
@@ -138,7 +138,6 @@ const createCalcOutput = (e) => {
         case "Backspace":
           backspace();
           break;
-
         case "=":
           showResult();
           countState.setState();
