@@ -74,6 +74,29 @@ const count = (num1, num2, operator) => {
   }
 };
 
+const choiceOperator = (value) => {
+  if (arrayForCalculator.includes(value)) {
+    if (isNaN(calkOutput.textContent[calkOutput.textContent.length - 1])) {
+      countState.setOperator(value);
+      calkOutput.textContent = `${calkOutput.textContent.slice(
+        0,
+        calkOutput.textContent.length - 1
+      )}`;
+      showOutput(value);
+    } else {
+      if (countState.result !== 0) {
+        showResult();
+        removeDisabled("point");
+      } else {
+        countState.setResult(+calkOutput.textContent);
+        removeDisabled("point");
+      }
+      countState.setOperator(value);
+      showOutput(value);
+    }
+  }
+};
+
 const addPoint = () => {
   if (
     !calkOutput.textContent ||
@@ -160,18 +183,8 @@ const createCalcOutput = (e) => {
           break;
 
         default:
-          if (arrayForCalculator.includes(value)) {
-            if (countState.result !== 0) {
-              showResult();
-              removeDisabled("point");
-            } else {
-              countState.setResult(+calkOutput.textContent);
-              removeDisabled("point");
-            }
-            countState.setOperator(value);
-            showOutput(value);
-            break;
-          }
+          choiceOperator(value);
+          break;
       }
     } else {
       showOutput(value);
