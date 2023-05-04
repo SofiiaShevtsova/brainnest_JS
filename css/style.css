@@ -98,7 +98,7 @@ main {
   transform: scale(1.2);
 }
 
-.result-game {
+.result-game, .error {
   visibility: hidden;
   position: absolute;
   top: -100%;
@@ -111,7 +111,7 @@ main {
   align-items: center;
   background-color: rgba(20, 20, 20, 0.9);
 }
-.result-game.open {
+.result-game.open, .error.open {
   visibility: visible;
   top: 0;
   left: 0;
@@ -168,6 +168,15 @@ main {
 .calcutor__btn:disabled {
   background-color: red;
   cursor: not-allowed;
+}
+
+.error__message{
+  margin: 50px auto 0;
+  padding: 20px;
+  text-align: center;
+  width: 80%;
+  font-size: 24px;
+  color: red;
 }
 
 @media screen and (max-width: 400px) {

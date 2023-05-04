@@ -20,6 +20,8 @@ const arrayForCalculator = [
 ];
 const calcTable = document.querySelector(".calcutor__list-btn");
 const calkOutput = document.querySelector(".calculator__output");
+const errorBox = document.querySelector(".error");
+const errorMessage = document.querySelector(".error__message");
 
 const countState = {
   result: 0,
@@ -48,9 +50,13 @@ const subtractNumber = (num1, num2) =>
 const multiplyNumder = (num1, num2) =>
   (num1 * num2).toFixed((num1 * num2) % 1 === 0 ? 0 : 2);
 const divideNumber = (num1, num2) => {
-  return +num2 === 0
-    ? "Сannot be divided by zero"
-    : (num1 / num2).toFixed((num1 / num2) % 1 === 0 ? 0 : 2);
+  if (+num2 === 0) {
+    errorMessage.textContent = "Сannot be divided by 0";
+    showError();
+    return countState.result;
+  } else {
+    return (num1 / num2).toFixed((num1 / num2) % 1 === 0 ? 0 : 2);
+  }
 };
 
 const count = (num1, num2, operator) => {
@@ -111,6 +117,13 @@ const showResult = () => {
   removeDisabled("point");
 };
 
+const showError = () => {
+  errorBox.classList.add("open");
+  errorBox.addEventListener("click", () => {
+    errorBox.classList.remove("open");
+  });
+};
+
 const removeDisabled = (id) => {
   document.querySelector(`#${id}`).removeAttribute("disabled", "");
 };
@@ -127,6 +140,9 @@ const createCalcOutput = (e) => {
     if (isNaN(+value)) {
       switch (value) {
         case "point":
+          addPoint();
+          break;
+        case ".":
           addPoint();
           break;
         case "CA":
