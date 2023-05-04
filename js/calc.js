@@ -1,23 +1,5 @@
-const arrayForCalculator = [
-  1,
-  2,
-  3,
-  "+",
-  4,
-  5,
-  6,
-  "-",
-  7,
-  8,
-  9,
-  "*",
-  "=",
-  0,
-  ".",
-  "/",
-  "C",
-  "CA",
-];
+const arrayForCalculator = [1,2,3,"+",4,5,6,"-",7,8,9,"*","=",0,".","/","C","CA"];
+
 const calcTable = document.querySelector(".calcutor__list-btn");
 const calkOutput = document.querySelector(".calculator__output");
 const errorBox = document.querySelector(".error");
@@ -55,7 +37,6 @@ const divideNumber = (num1, num2) => {
   if (num2 === "") {
     return countState.result;
   }
-  console.dir(num2 === "");
   if (+num2 === 0) {
     errorMessage.textContent = "Сannot be divided by 0";
     showError();
@@ -81,20 +62,18 @@ const count = (num1, num2, action) => {
 };
 
 const choiceOperator = (value) => {
+  const text = calkOutput.textContent;
   if (arrayForCalculator.includes(value)) {
-    if (isNaN(calkOutput.textContent[calkOutput.textContent.length - 1])) {
+    if (isNaN(text[text.length - 1])) {
       countState.setOperator(value);
-      calkOutput.textContent = `${calkOutput.textContent.slice(
-        0,
-        calkOutput.textContent.length - 1
-      )}`;
+      calkOutput.textContent = `${text.slice(0, text.length - 1)}`;
       showOutput(value);
     } else {
       if (countState.result !== 0) {
         showResult();
         removeDisabled("point");
       } else {
-        countState.setResult(+calkOutput.textContent);
+        countState.setResult(+text);
         removeDisabled("point");
       }
       countState.setOperator(value);
@@ -104,18 +83,16 @@ const choiceOperator = (value) => {
 };
 
 const addPoint = () => {
+  const text = calkOutput.textContent;
   if (document.querySelector("#point").hasAttribute("disabled")) {
     return;
   }
-  if (
-    !calkOutput.textContent ||
-    isNaN(+calkOutput.textContent[calkOutput.textContent.length - 1])
-  ) {
+  if (!text || isNaN(+text[text.length - 1])) {
     document.querySelector("#point").setAttribute("disabled", "");
-    calkOutput.textContent = `${calkOutput.textContent}0.`;
+    calkOutput.textContent = `${text}0.`;
   } else {
     document.querySelector("#point").setAttribute("disabled", "");
-    calkOutput.textContent = `${calkOutput.textContent}.`;
+    calkOutput.textContent = `${text}.`;
   }
 };
 
@@ -125,16 +102,11 @@ const clearAll = () => {
 };
 
 const backspace = () => {
-  if (
-    calkOutput.textContent[calkOutput.textContent.length - 1] ===
-    countState.operator
-  ) {
+  const text = calkOutput.textContent;
+  if (text[text.length - 1] === countState.operator) {
     document.querySelector("#C").setAttribute("disabled", "");
   } else {
-    calkOutput.textContent = `${calkOutput.textContent.slice(
-      0,
-      calkOutput.textContent.length - 1
-    )}`;
+    calkOutput.textContent = `${text.slice(0, text.length - 1)}`;
   }
 };
 
@@ -217,7 +189,6 @@ const addCalcBtn = () => {
     .join(" ");
   calcTable.innerHTML = calcBtn;
 };
-
 addCalcBtn();
 
 calcTable.addEventListener("click", createCalcOutput);
