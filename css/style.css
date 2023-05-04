@@ -98,7 +98,8 @@ main {
   transform: scale(1.2);
 }
 
-.result-game, .error {
+.result-game,
+.error {
   visibility: hidden;
   position: absolute;
   top: -100%;
@@ -111,7 +112,8 @@ main {
   align-items: center;
   background-color: rgba(20, 20, 20, 0.9);
 }
-.result-game.open, .error.open {
+.result-game.open,
+.error.open {
   visibility: visible;
   top: 0;
   left: 0;
@@ -166,12 +168,18 @@ main {
   cursor: pointer;
 }
 
+.calcutor__btn:hover {
+  background-color: var(--main-text-color);
+  color: aliceblue;
+  border: 2px solid var(--main-text-color);
+}
+
 .calcutor__btn:disabled {
   background-color: red;
   cursor: not-allowed;
 }
 
-.error__message{
+.error__message {
   margin: 50px auto 0;
   padding: 20px;
   text-align: center;
