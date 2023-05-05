@@ -17,6 +17,10 @@ h3 {
   padding: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -83,18 +87,18 @@ main {
 .player-choice > button {
   padding: 10px 0;
   width: 20vw;
-  background-color: var(--main-text-color);
-  color: aliceblue;
+  background-color: aliceblue;
+  color: var(--main-text-color);
+  border: 3px solid var(--main-text-color);
   font-size: 20px;
   font-weight: 500;
   border-radius: 20px;
-  border: none;
-  cursor: pointer;
   transition: all 0.5s linear;
 }
 
 .player-choice > button:hover {
-  background-color: rgb(255, 20, 20);
+  background-color: var(--main-text-color);
+  color: aliceblue;
   transform: scale(1.2);
 }
 
@@ -162,16 +166,17 @@ main {
   width: 100%;
   padding: 5px;
   border-radius: 5px;
-  border: 2px solid black;
-  color: inherit;
+  background-color: aliceblue;
+  color: var(--main-text-color);
+  border: 3px solid var(--main-text-color);
   font-size: 25px;
-  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.5s linear;
 }
 
 .calcutor__btn:hover {
   background-color: var(--main-text-color);
   color: aliceblue;
-  border: 2px solid var(--main-text-color);
 }
 
 .calcutor__btn:disabled {
