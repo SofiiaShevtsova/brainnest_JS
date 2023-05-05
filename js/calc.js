@@ -139,6 +139,7 @@ const removeDisabled = (id) => {
 };
 
 const createCalcOutput = (e) => {
+  errorBox.classList.remove("open");
   if (e.target.type === "button" || e.key) {
     const value = e.key || e.target.id;
     removeDisabled("C");
