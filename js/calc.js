@@ -25,14 +25,12 @@ const countState = {
   },
 };
 
-const addNumder = (num1, num2) =>
-  (+num1 + +num2).toFixed((+num1 + +num2) % 1 === 0 ? 0 : 2);
-const subtractNumber = (num1, num2) =>
-  (num1 - num2).toFixed((num1 - num2) % 1 === 0 ? 0 : 2);
+const formatResult = (num) => num.toFixed(num % 1 === 0 ? 0 : 2);
+
+const addNumder = (num1, num2) => formatResult(+num1 + +num2);
+const subtractNumber = (num1, num2) => formatResult(num1 - num2);
 const multiplyNumder = (num1, num2 = 1) =>
-  num2 === ""
-    ? countState.result
-    : (num1 * num2).toFixed((num1 * num2) % 1 === 0 ? 0 : 2);
+  num2 === "" ? countState.result : formatResult(num1 * num2);
 const divideNumber = (num1, num2) => {
   if (num2 === "") {
     return countState.result;
@@ -42,7 +40,7 @@ const divideNumber = (num1, num2) => {
     showError();
     return countState.result;
   } else {
-    return (num1 / num2).toFixed((num1 / num2) % 1 === 0 ? 0 : 2);
+    return formatResult(num1 / num2);
   }
 };
 
