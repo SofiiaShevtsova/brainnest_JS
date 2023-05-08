@@ -15,6 +15,7 @@ h2,
 h3 {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 button {
@@ -193,12 +194,22 @@ main {
   color: red;
 }
 
+.shipsBattle__all{
+display: flex;
+flex-direction: column;
+font-size: 24px;
+font-weight: 500;
+color: brown;
+}
+
 .shipsBattle__row{
   display: flex;
-  list-style: none;
 }
 
 .shipsBattle__item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50px;
   height: 50px;
   border: 1px solid black;
