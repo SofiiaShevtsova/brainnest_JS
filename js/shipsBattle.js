@@ -6,7 +6,6 @@ const shipState = {
   h3: 2,
   h4: 1,
   setState(key) {
-    console.log(this[key] - 1);
     shipState[key] = this[key] - 1;
   },
 };
@@ -61,6 +60,9 @@ const onShipsClick = (e) => {
 
 const addShip = (startPlace, lang, pos, classAdd) => {
   const start = startPlace;
+  if (document.querySelector(`.ship-red.ship-red-bor`)) {
+    return;
+  }
   if (pos === "h") {
     if (
       (+lang === 2 && start.slice(1) === "10") ||
@@ -73,7 +75,7 @@ const addShip = (startPlace, lang, pos, classAdd) => {
       document.querySelector(`#${start[0] + i}`) &&
         document.querySelector(`#${start[0] + i}`).classList.add(classAdd);
     }
-    return true
+    return true;
   } else {
     if (
       (+lang === 2 && start[0] === arrayOfField[-1]) ||
@@ -90,12 +92,12 @@ const addShip = (startPlace, lang, pos, classAdd) => {
     for (const i of newArray) {
       document.querySelector(`#${i + start.slice(1)}`).classList.add(classAdd);
     }
-        return true
+    return true;
   }
 };
 
 battleField.innerHTML = addField();
-port.insertAdjacentHTML("beforeend", AddShips())
+port.insertAdjacentHTML("beforeend", AddShips());
 
 port.addEventListener("click", onShipsClick);
 
@@ -111,7 +113,7 @@ battleField.addEventListener("dragleave", dragLeave);
 battleField.addEventListener("drop", drop);
 
 function dragStart(e) {
-  if (!e.target.id) return
+  if (!e.target.id) return;
   if (e.target.id) {
     draggedShip = e.target.id;
   }
@@ -142,8 +144,13 @@ function dragLeave() {
 
 function drop(e) {
   if (e.target) {
-   const added = addShip(e.target.id, +draggedShip[1], draggedShip[0], "ship-red");
- added && shipState.setState(draggedShip);
+    const added = addShip(
+      e.target.id,
+      +draggedShip[1],
+      draggedShip[0],
+      "ship-red"
+    );
+    added && shipState.setState(draggedShip);
 
     if (shipState[draggedShip] === 0) {
       document.querySelector(`.${draggedShip}`).classList.add("none");
