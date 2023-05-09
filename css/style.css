@@ -194,6 +194,15 @@ main {
   color: red;
 }
 
+.shipsBattle {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .shipsBattle__all{
 display: flex;
 flex-direction: column;
@@ -210,8 +219,8 @@ color: brown;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border: 1px solid black;
 }
 
@@ -224,31 +233,63 @@ color: brown;
 }
 
 .shipsBattle__port{
+  position: relative;
+  min-height: 160px;
+  width: 100vw;
   margin: 20px auto;
   padding: 20px;
   background-color: aqua;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 20px;
 }
 
+.shipsBattle__text{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+width: 200px;
+font-size: 20px;
+font-weight: 500;
+color: blue;
+}
+
+.shipsBattle__text.turn {
+  top: 40%;
+  left: 80%;
+}
+
 .shipsBattle__port>div {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background-color: blue;
   cursor: pointer;
 }
 
-.shipsBattle__port > .h2 {
-  width: 100px;
+.shipsBattle__port > #h2 {
+  width: 60px;
 }
 
-.shipsBattle__port > .h3 {
-  width: 150px;
+.shipsBattle__port > #h3 {
+  width: 90px;
 }
 
-.shipsBattle__port >.h4 {
-  width: 200px;
+.shipsBattle__port >#h4 {
+  width: 120px;
+}
+
+.shipsBattle__port>#v2 {
+  height: 60px;
+}
+
+.shipsBattle__port>#v3 {
+  height: 90px;
+}
+
+.shipsBattle__port>#v4 {
+  height: 120px;
 }
 
 .shipsBattle__port>.ship.none {

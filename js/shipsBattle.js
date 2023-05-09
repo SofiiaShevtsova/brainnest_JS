@@ -18,11 +18,11 @@ let draggedShip = null;
 
 const addItem = (item, text = false) => {
   let element = "";
-  for (let i = 0; i < arrayOfField.length+1; i++) {
+  for (let i = 0; i < arrayOfField.length + 1; i++) {
     element =
       element +
-      `<li id="${i===0?i:item + i}" class="shipsBattle__item">${
-        i===0 ? `${item}` : ""
+      `<li id="${i === 0 ? i : item + i}" class="shipsBattle__item">${
+        i === 0 ? `${item}` : ""
       }</li>`;
   }
   return element;
@@ -30,9 +30,9 @@ const addItem = (item, text = false) => {
 
 const addField = () => {
   const title = `<ul class="shipsBattle__row"><li class="shipsBattle__item"></li>${arrayOfField
-    .map((item, i) => `<li class="shipsBattle__item">${i+1}</li>`)
+    .map((item, i) => `<li class="shipsBattle__item">${i + 1}</li>`)
     .join(" ")}</ul>`;
-  
+
   const field = arrayOfField
     .map((item, i) => {
       return `<li><ul class="shipsBattle__row" id="${item}">
@@ -41,8 +41,8 @@ const addField = () => {
     })
     .join(" ");
 
-  const allTitle = `<ul class="shipsBattle__all"><li> ${title}</li>${field}</ul>`;
-  return allTitle;
+  const allField = `<ul class="shipsBattle__all"><li> ${title}</li>${field}</ul>`;
+  return allField;
 };
 
 const AddShips = () => {
@@ -56,30 +56,45 @@ const onShipsClick = (e) => {
   if (e.target.id) {
     e.target.id =
       e.target.id[0] === "h" ? "v" + e.target.id[1] : "h" + e.target.id[1];
-    console.log(e.target.id);
   }
 };
 
 const addShip = (startPlace, lang, pos, classAdd) => {
   const start = startPlace;
   if (pos === "h") {
-    for (let i = start[1]; i < +start[1] + lang; i++) {
+    if (
+      (+lang === 2 && start.slice(1) === "10") ||
+      (+lang === 3 && ["9", "10"].includes(start.slice(1))) ||
+      (+lang === 4 && ["8", "9", "10"].includes(start.slice(1)))
+    ) {
+      return;
+    }
+    for (let i = start.slice(1); i < +start.slice(1) + lang; i++) {
       document.querySelector(`#${start[0] + i}`) &&
         document.querySelector(`#${start[0] + i}`).classList.add(classAdd);
     }
   } else {
+    if (
+      (+lang === 2 && start[0] === arrayOfField[-1]) ||
+      (+lang === 3 && arrayOfField.slice(-2).includes(start[0])) ||
+      (+lang === 4 && arrayOfField.slice(-3).includes(start[0]))
+    ) {
+      return;
+    }
+
     const newArray = arrayOfField.slice(
       arrayOfField.indexOf(start[0]),
       arrayOfField.indexOf(start[0]) + lang
     );
     for (const i of newArray) {
-      document.querySelector(`#${i + start[1]}`).classList.add(classAdd);
+      document.querySelector(`#${i + start.slice(1)}`).classList.add(classAdd);
     }
   }
+  shipState.setState(draggedShip);
 };
 
 battleField.innerHTML = addField();
-port.innerHTML = AddShips();
+port.insertAdjacentHTML("beforeend", AddShips())
 
 port.addEventListener("click", onShipsClick);
 
@@ -126,8 +141,6 @@ function dragLeave() {
 function drop(e) {
   if (e.target) {
     addShip(e.target.id, +draggedShip[1], draggedShip[0], "ship-red");
-    shipState.setState(draggedShip);
-    console.log(shipState[draggedShip]);
 
     if (shipState[draggedShip] === 0) {
       document.querySelector(`.${draggedShip}`).classList.add("none");

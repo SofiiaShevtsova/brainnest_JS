@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../images/add.png">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../images/add.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>ships battle</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h2>Ships battle</h2>
-        <a href="../index.html">Game</a>
+      <h2>Ships battle</h2>
+      <a href="../index.html">Game</a>
     </header>
     <main>
-        <section class="start">
-            <h2 class="start__title">Do you want to play?</h2>
-        </section>
-        <section class="shipsBattle">
-            <div class="shipsBattle__field"></div>
+      <section class="start">
+        <h2 class="start__title">Do you want to play?</h2>
+      </section>
+      <section class="shipsBattle">
+        <div class="shipsBattle__field"></div>
+        <div class="shipsBattle__port">
+          <p class="shipsBattle__text">
+            Choice ship and place it in battle field.
+          </p>
+                    <p class="shipsBattle__text turn">
+                        If you need turn around ship click on it.
+                    </p>
 
-            <div class="shipsBattle__port"></div>
-        </section>
-        <section class="error">
-            <p class="error__message"></p>
-        </section>
+        </div>
+      </section>
+      <section class="error">
+        <p class="error__message"></p>
+      </section>
     </main>
     <script src="../js/shipsBattle.js" type="module"></script>
-</body>
-
+  </body>
 </html>
