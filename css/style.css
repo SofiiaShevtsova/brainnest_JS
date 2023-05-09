@@ -47,7 +47,6 @@ header > a:hover {
 }
 
 main {
-  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -195,7 +194,7 @@ main {
 }
 
 .shipsBattle {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -203,19 +202,19 @@ main {
   text-align: center;
 }
 
-.shipsBattle__all{
-display: flex;
-flex-direction: column;
-font-size: 24px;
-font-weight: 500;
-color: brown;
+.shipsBattle__all {
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+  font-weight: 500;
+  color: brown;
 }
 
-.shipsBattle__row{
+.shipsBattle__row {
   display: flex;
 }
 
-.shipsBattle__item{
+.shipsBattle__item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,18 +223,18 @@ color: brown;
   border: 1px solid black;
 }
 
-.ship-red{
+.ship-red {
   background-color: red;
 }
 
-.ship-red-bor{
+.ship-red-bor {
   border: 1px solid red;
 }
 
-.shipsBattle__port{
+.shipsBattle__port {
   position: relative;
   min-height: 160px;
-  width: 100vw;
+  width: 100%;
   margin: 20px auto;
   padding: 20px;
   background-color: aqua;
@@ -246,22 +245,23 @@ color: brown;
   gap: 20px;
 }
 
-.shipsBattle__text{
+.shipsBattle__text {
   position: absolute;
   top: 20px;
   left: 20px;
-width: 200px;
-font-size: 20px;
-font-weight: 500;
-color: blue;
+  width: 200px;
+  font-size: 20px;
+  font-weight: 500;
+  color: blue;
 }
 
 .shipsBattle__text.turn {
   top: 40%;
-  left: 80%;
+  left: auto;
+  right: 20px;
 }
 
-.shipsBattle__port>div {
+.shipsBattle__port > div {
   width: 30px;
   height: 30px;
   background-color: blue;
@@ -276,24 +276,25 @@ color: blue;
   width: 90px;
 }
 
-.shipsBattle__port >#h4 {
+.shipsBattle__port > #h4 {
   width: 120px;
 }
 
-.shipsBattle__port>#v2 {
+.shipsBattle__port > #v2 {
   height: 60px;
 }
 
-.shipsBattle__port>#v3 {
+.shipsBattle__port > #v3 {
   height: 90px;
 }
 
-.shipsBattle__port>#v4 {
+.shipsBattle__port > #v4 {
   height: 120px;
 }
 
-.shipsBattle__port>.ship.none {
-display: none;}
+.shipsBattle__port > .ship.none {
+  display: none;
+}
 
 @media screen and (max-width: 400px) {
   header {
@@ -304,7 +305,3 @@ display: none;}
     font-size: 14px;
   }
 }
-
-
-
-
