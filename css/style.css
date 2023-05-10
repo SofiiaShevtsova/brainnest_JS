@@ -202,12 +202,23 @@ main {
   text-align: center;
 }
 
+.shipsBattle__fields {
+  display: flex;
+  gap: 10%;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--main-text-color);
+}
+
 .shipsBattle__all {
   display: flex;
   flex-direction: column;
   font-size: 24px;
   font-weight: 500;
   color: brown;
+  margin-top: 20px;
 }
 
 .shipsBattle__row {

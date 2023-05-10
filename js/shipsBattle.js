@@ -11,23 +11,23 @@ const shipState = {
 };
 
 const port = document.querySelector(".shipsBattle__port");
-const battleField = document.querySelector(".shipsBattle__field");
-
+const battleFieldUser = document.querySelector(".shipsBattle__user-field");
+const battleFieldComp = document.querySelector(".shipsBattle__comp-field");
 let draggedShip = null;
 
-const addItem = (item, text = false) => {
+const addItem = (item) => {
   let element = "";
   for (let i = 0; i < arrayOfField.length + 1; i++) {
     element =
       element +
       `<li id="${i === 0 ? i : item + i}" class="shipsBattle__item">${
-        i === 0 ? `${item}` : ""
+        i === 0 ? `${item[1]}` : ""
       }</li>`;
   }
   return element;
 };
 
-const addField = () => {
+const addField = (isCompFields = false) => {
   const title = `<ul class="shipsBattle__row"><li class="shipsBattle__item"></li>${arrayOfField
     .map((item, i) => `<li class="shipsBattle__item">${i + 1}</li>`)
     .join(" ")}</ul>`;
@@ -35,7 +35,7 @@ const addField = () => {
   const field = arrayOfField
     .map((item, i) => {
       return `<li><ul class="shipsBattle__row" id="${item}">
-    ${addItem(item)}
+    ${isCompFields ? addItem("c" + item) : addItem("u" + item)}
     </ul></li>`;
     })
     .join(" ");
@@ -58,45 +58,50 @@ const onShipsClick = (e) => {
   }
 };
 
-const addShip = (startPlace, lang, pos, classAdd) => {
+const addShip = (startPlace, lang, pos, classAdd, field) => {
   const start = startPlace;
   if (document.querySelector(`.ship-red.ship-red-bor`)) {
-    return;
+    return false;
   }
   if (pos === "h") {
     if (
-      (+lang === 2 && start.slice(1) === "10") ||
-      (+lang === 3 && ["9", "10"].includes(start.slice(1))) ||
-      (+lang === 4 && ["8", "9", "10"].includes(start.slice(1)))
+      (lang === 2 && start.slice(1) === "10") ||
+      (lang === 3 && ["9", "10"].includes(start.slice(1))) ||
+      (lang === 4 && ["8", "9", "10"].includes(start.slice(1)))
     ) {
       return false;
     }
-    for (let i = start.slice(1); i < +start.slice(1) + lang; i++) {
-      document.querySelector(`#${start[0] + i}`) &&
-        document.querySelector(`#${start[0] + i}`).classList.add(classAdd);
+    for (let i = +start.slice(2); i < +start.slice(2) + lang; i++) {
+      document.querySelector(`#${start.slice(0, 2) + i}`) &&
+        document
+          .querySelector(`#${start.slice(0, 2) + i}`)
+          .classList.add(classAdd);
     }
     return true;
   } else {
     if (
-      (+lang === 2 && start[0] === arrayOfField[-1]) ||
-      (+lang === 3 && arrayOfField.slice(-2).includes(start[0])) ||
-      (+lang === 4 && arrayOfField.slice(-3).includes(start[0]))
+      (lang === 2 && start.slice(1, 2) === arrayOfField[-1]) ||
+      (lang === 3 && arrayOfField.slice(-2).includes(start.slice(1, 2))) ||
+      (lang === 4 && arrayOfField.slice(-3).includes(start.slice(1, 2)))
     ) {
       return false;
     }
 
     const newArray = arrayOfField.slice(
-      arrayOfField.indexOf(start[0]),
-      arrayOfField.indexOf(start[0]) + lang
+      arrayOfField.indexOf(start.slice(1, 2)),
+      +arrayOfField.indexOf(start.slice(1, 2)) + lang
     );
     for (const i of newArray) {
-      document.querySelector(`#${i + start.slice(1)}`).classList.add(classAdd);
+      document
+        .querySelector(`#${field}${i + start.slice(2)}`)
+        .classList.add(classAdd);
     }
     return true;
   }
 };
 
-battleField.innerHTML = addField();
+battleFieldUser.insertAdjacentHTML("beforeend", addField());
+battleFieldComp.insertAdjacentHTML("beforeend", addField(true));
 port.insertAdjacentHTML("beforeend", AddShips());
 
 port.addEventListener("click", onShipsClick);
@@ -107,10 +112,10 @@ allShips.forEach((ship) => {
   ship.addEventListener("dragend", dragEnd);
 });
 
-battleField.addEventListener("dragover", dragOver);
-battleField.addEventListener("dragenter", dragEnter);
-battleField.addEventListener("dragleave", dragLeave);
-battleField.addEventListener("drop", drop);
+battleFieldUser.addEventListener("dragover", dragOver);
+battleFieldUser.addEventListener("dragenter", dragEnter);
+battleFieldUser.addEventListener("dragleave", dragLeave);
+battleFieldUser.addEventListener("drop", drop);
 
 function dragStart(e) {
   if (!e.target.id) return;
@@ -126,7 +131,10 @@ function dragEnd() {
 function dragOver(e) {
   e.preventDefault();
   if (draggedShip) {
-    addShip(e.target.id, +draggedShip[1], draggedShip[0], "ship-red-bor");
+    if (e.target.id === "0") {
+      return;
+    }
+    addShip(e.target.id, +draggedShip[1], draggedShip[0], "ship-red-bor", "u");
   }
 }
 
@@ -148,12 +156,50 @@ function drop(e) {
       e.target.id,
       +draggedShip[1],
       draggedShip[0],
-      "ship-red"
+      "ship-red",
+      "u"
     );
-    added && shipState.setState(draggedShip);
+    added && shipState.setState("h" + draggedShip[1]);
 
-    if (shipState[draggedShip] === 0) {
-      document.querySelector(`.${draggedShip}`).classList.add("none");
+    if (shipState[`h${draggedShip[1]}`] === 0) {
+      document.querySelector(`.h${draggedShip[1]}`).classList.add("none");
     }
   }
 }
+
+const compChoiceStart = () => {
+  const arrayOfChoice = [];
+  arrayOfField.map((i) => {
+    for (let index = 1; index < arrayOfField.length + 1; index++) {
+      arrayOfChoice.push(`c${i}${index}`);
+    }
+  });
+  const choise =
+    arrayOfChoice[Math.floor(Math.random() * arrayOfChoice.length)];
+  return choise;
+};
+
+const compChoiceShip = () => {
+  const arrayShipLang = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
+  const newArray = arrayShipLang.map((i) => {
+    const position = Math.floor(Math.random() * 2) === 0 ? "h" : "v";
+    return i === 1 ? "h1" : position + i;
+  });
+  return newArray;
+};
+// -----------------------------------комп грає --------------------------------------------------------
+const arrayComp = compChoiceShip();
+
+arrayComp.map((i) => {
+  let result = true;
+  do {
+    const start = compChoiceStart();
+    addShip(start, +i.slice(1), i[0], "ship-red-bor", "c");
+    result = addShip(start, +i.slice(1), i[0], "ship-red", "c");
+
+    const choiseItem = [...document.querySelectorAll(".ship-red-bor")];
+    choiseItem.map((item) => {
+      item.classList.remove("ship-red-bor");
+    });
+  } while (!result);
+});
