@@ -334,7 +334,7 @@ main {
   background-color: inherit;
   color: inherit;
   font-size: 20px;
-  margin-bottom: 20px;
+  margin: 20px auto;
 }
 
 @media screen and (max-width: 400px) {

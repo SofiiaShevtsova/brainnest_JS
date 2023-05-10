@@ -1,6 +1,7 @@
 import { addShipsInField } from "./addShips.js";
 
 const startButton = document.querySelector(".shipsBattle__button");
+const port = document.querySelector(".shipsBattle__port");
 
 const shipState = {
   h1: 4,
@@ -68,7 +69,8 @@ export function drop(e) {
       document.querySelector(`.h${draggedShip[1]}`).classList.add("none");
     }
     if (shipState.h1 === 0 &&shipState.h2 === 0 && shipState.h3 === 0&&shipState.h4 === 0) {
-     startButton.classList.remove('none') 
+      startButton.classList.remove('none') 
+      port.classList.add("none");
     }
   }
 }

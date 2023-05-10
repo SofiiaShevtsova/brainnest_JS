@@ -56,14 +56,20 @@ battleFieldUser.insertAdjacentHTML("beforeend", addField());
 battleFieldComp.insertAdjacentHTML("beforeend", addField(true));
 port.insertAdjacentHTML("beforeend", AddShips());
 
-  const shot = (shotElement) => {
-    if (shotElement.classList.contains("ship-green")) {
+const shot = (shotElement) => {
+  if (
+    shotElement.classList.contains("ship-red") ||
+    shotElement.classList.contains("water")
+  ) {
+    return "Bad shot";
+  }
+  if (shotElement.classList.contains("ship-green")) {
     shotElement.classList.remove("ship-green");
     shotElement.classList.add("ship-red");
-    } else {
-      shotElement.classList.add("water")
-    }
+  } else {
+    shotElement.classList.add("water");
   }
+};
 
 const onShipsClick = (e) => {
   if (e.target.id) {
@@ -73,16 +79,21 @@ const onShipsClick = (e) => {
 };
 
 const onStartClick = (e) => {
-  port.classList.add("none");
-  compPlayed()
+  compPlayed();
   startButton.classList.add("none");
 
   battleFieldComp.addEventListener("click", (e) => {
     if (arrayOfField.includes(e.target.id[1])) {
-       shot(e.target)
+      const userShot = shot(e.target);
+      if (userShot === "Bad shot") {
+        return;
+      }
     }
-    const compShot = "u" + compChoiceStart().slice(1)
-    shot(document.getElementById(`${compShot}`))
+    let compShot;
+    do {
+      const compChoice = "u" + compChoiceStart().slice(1);
+      compShot = shot(document.getElementById(`${compChoice}`));
+    } while (compShot === "Bad shot");
   });
 };
 
@@ -99,7 +110,3 @@ battleFieldUser.addEventListener("dragover", dragOver);
 battleFieldUser.addEventListener("dragenter", dragEnter);
 battleFieldUser.addEventListener("dragleave", dragLeave);
 battleFieldUser.addEventListener("drop", drop);
-
-// --------------------------
-
-
