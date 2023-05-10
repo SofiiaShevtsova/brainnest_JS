@@ -234,8 +234,20 @@ main {
   border: 1px solid black;
 }
 
+.shipsBattle__item.water{
+  background-color: blue;
+}
+
 .ship-red {
   background-color: red;
+}
+
+.shipsBattle__user-field .ship-green {
+  background-color: green;
+}
+
+.shipsBattle__comp-field .ship-green{
+  background-color: transparent;
 }
 
 .ship-red-bor {
@@ -272,6 +284,10 @@ main {
   right: 20px;
 }
 
+.shipsBattle__port.none {
+ display: none;
+}
+
 .shipsBattle__port > div {
   width: 30px;
   height: 30px;
@@ -305,6 +321,20 @@ main {
 
 .shipsBattle__port > .ship.none {
   display: none;
+}
+
+.shipsBattle__button.none{
+  display: none;
+}
+
+.shipsBattle__button{
+  padding: 10px 30px;
+  border: 1px solid var(--main-text-color);
+  border-radius: 10px;
+  background-color: inherit;
+  color: inherit;
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 400px) {
