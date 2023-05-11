@@ -78,23 +78,44 @@ const onShipsClick = (e) => {
   }
 };
 
+const playAgain = () => {
+  port.classList.remove("none");
+  port.innerHTML = `<a  href="./pages/shipsBattle.html">Play again?</a>`;
+};
+
+const onFieldClick = (e) => {
+  if (e.target.textContent !== "") {
+    return;
+  }
+  if (arrayOfField.includes(e.target.id[1])) {
+    const userShot = shot(e.target);
+    if (userShot === "Bad shot") {
+      return;
+    }
+  }
+  let compShot;
+  do {
+    const compChoice = "u" + compChoiceStart().slice(1);
+    compShot = shot(document.getElementById(`${compChoice}`));
+
+    if (battleFieldUser.querySelectorAll(".ship-red").length === 20) {
+      alert("Computer win");
+      battleFieldComp.removeEventListener("click", onFieldClick);
+      playAgain();
+    }
+    if (battleFieldComp.querySelectorAll(".ship-red").length === 20) {
+      alert("User win");
+      battleFieldComp.removeEventListener("click", onFieldClick);
+      playAgain();
+    }
+  } while (compShot === "Bad shot");
+};
+
 const onStartClick = (e) => {
   compPlayed();
   startButton.classList.add("none");
 
-  battleFieldComp.addEventListener("click", (e) => {
-    if (arrayOfField.includes(e.target.id[1])) {
-      const userShot = shot(e.target);
-      if (userShot === "Bad shot") {
-        return;
-      }
-    }
-    let compShot;
-    do {
-      const compChoice = "u" + compChoiceStart().slice(1);
-      compShot = shot(document.getElementById(`${compChoice}`));
-    } while (compShot === "Bad shot");
-  });
+  battleFieldComp.addEventListener("click", onFieldClick);
 };
 
 port.addEventListener("click", onShipsClick);
