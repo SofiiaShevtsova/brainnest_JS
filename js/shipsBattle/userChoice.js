@@ -1,4 +1,4 @@
-import { addShipsInField } from "./addShips.js";
+import { addShipsInField, tryAddShipsInField } from "./addShips.js";
 
 const startButton = document.querySelector(".shipsBattle__button");
 const port = document.querySelector(".shipsBattle__port");
@@ -32,13 +32,7 @@ export function dragOver(e) {
     if (e.target.id === "0") {
       return;
     }
-    addShipsInField(
-      e.target.id,
-      +draggedShip[1],
-      draggedShip[0],
-      "ship-red-bor",
-      "u"
-    );
+    tryAddShipsInField(e.target.id, +draggedShip[1], draggedShip[0], "u");
   }
 }
 
@@ -60,7 +54,6 @@ export function drop(e) {
       e.target.id,
       +draggedShip[1],
       draggedShip[0],
-      "ship-green",
       "u"
     );
     added && shipState.setState("h" + draggedShip[1]);
@@ -68,8 +61,13 @@ export function drop(e) {
     if (shipState[`h${draggedShip[1]}`] === 0) {
       document.querySelector(`.h${draggedShip[1]}`).classList.add("none");
     }
-    if (shipState.h1 === 0 &&shipState.h2 === 0 && shipState.h3 === 0&&shipState.h4 === 0) {
-      startButton.classList.remove('none') 
+    if (
+      shipState.h1 === 0 &&
+      shipState.h2 === 0 &&
+      shipState.h3 === 0 &&
+      shipState.h4 === 0
+    ) {
+      startButton.classList.remove("none");
       port.classList.add("none");
     }
   }

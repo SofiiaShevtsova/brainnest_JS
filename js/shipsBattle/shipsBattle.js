@@ -66,6 +66,7 @@ const shot = (shotElement) => {
   if (shotElement.classList.contains("ship-green")) {
     shotElement.classList.remove("ship-green");
     shotElement.classList.add("ship-red");
+    return "Good shot"
   } else {
     shotElement.classList.add("water");
   }
@@ -89,7 +90,7 @@ const onFieldClick = (e) => {
   }
   if (arrayOfField.includes(e.target.id[1])) {
     const userShot = shot(e.target);
-    if (userShot === "Bad shot") {
+    if (userShot === "Bad shot" || userShot==="Good shot") {
       return;
     }
   }
@@ -102,16 +103,23 @@ const onFieldClick = (e) => {
       alert("Computer win");
       battleFieldComp.removeEventListener("click", onFieldClick);
       playAgain();
+      return
     }
     if (battleFieldComp.querySelectorAll(".ship-red").length === 20) {
       alert("User win");
       battleFieldComp.removeEventListener("click", onFieldClick);
       playAgain();
+      return
     }
-  } while (compShot === "Bad shot");
+  } while (compShot === "Bad shot" || compShot==="Good shot");
 };
 
 const onStartClick = (e) => {
+  const choiseItem = [...document.querySelectorAll(".ship-red-bor")];
+      choiseItem.map((item) => {
+        item.classList.remove("ship-red-bor");
+      });
+  
   compPlayed();
   startButton.classList.add("none");
 

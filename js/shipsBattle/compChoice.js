@@ -1,5 +1,5 @@
 import { arrayOfField } from "./shipsBattle.js";
-import { addShipsInField } from "./addShips.js";
+import { addShipsInField, tryAddShipsInField } from "./addShips.js";
 
 const compChoiceShips = () => {
   const arrayShipLang = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
@@ -24,19 +24,20 @@ export const compChoiceStart = () => {
 
 export const compPlayed = () => {
   const arrayComp = compChoiceShips();
-  
+
   arrayComp.map((i) => {
-    let result = true;
+    let result = false;
+    let tryAdd = true;
     do {
       const start = compChoiceStart();
-      addShipsInField(start, +i.slice(1), i[0], "ship-red-bor", "c");
-      result = addShipsInField(start, +i.slice(1), i[0], "ship-green", "c");
+      tryAdd = tryAddShipsInField(start, +i.slice(1), i[0], "c");
+      if (tryAdd) {
+        result = addShipsInField(start, +i.slice(1), i[0], "c");
+      }
       const choiseItem = [...document.querySelectorAll(".ship-red-bor")];
       choiseItem.map((item) => {
         item.classList.remove("ship-red-bor");
       });
     } while (!result);
   });
-
-}
-
+};
