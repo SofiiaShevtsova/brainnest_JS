@@ -4,9 +4,9 @@ const startButton = document.querySelector(".shipsBattle__button");
 const port = document.querySelector(".shipsBattle__port");
 
 const shipState = {
-  h1: 1,
-  h2: 1,
-  h3: 1,
+  h1: 4,
+  h2: 3,
+  h3: 2,
   h4: 1,
   setState(key) {
     shipState[key] = this[key] - 1;
