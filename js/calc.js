@@ -188,7 +188,6 @@ const addCalcBtn = () => {
     .join(" ");
   calcTable.innerHTML = calcBtn;
 };
-
 addCalcBtn();
 
 calcTable.addEventListener("click", createCalcOutput);
