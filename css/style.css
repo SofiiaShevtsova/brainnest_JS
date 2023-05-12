@@ -234,7 +234,7 @@ main {
   border: 1px solid black;
 }
 
-.shipsBattle__item.water{
+.shipsBattle__item.water {
   background-color: blue;
 }
 
@@ -246,7 +246,7 @@ main {
   background-color: green;
 }
 
-.shipsBattle__comp-field .ship-green{
+.shipsBattle__comp-field .ship-green {
   background-color: transparent;
 }
 
@@ -254,7 +254,7 @@ main {
   border: 1px solid red;
 }
 
-.ship-red-bor.ship-green{
+.ship-red-bor.ship-green {
   background-color: red;
 }
 
@@ -289,7 +289,7 @@ main {
 }
 
 .shipsBattle__port.none {
- display: none;
+  display: none;
 }
 
 .shipsBattle__port > div {
@@ -327,11 +327,17 @@ main {
   display: none;
 }
 
-.shipsBattle__button.none{
+.shipsBattle__port > a {
+  color: inherit;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.shipsBattle__button.none {
   display: none;
 }
 
-.shipsBattle__button{
+.shipsBattle__button {
   padding: 10px 30px;
   border: 1px solid var(--main-text-color);
   border-radius: 10px;
@@ -339,6 +345,22 @@ main {
   color: inherit;
   font-size: 20px;
   margin: 20px auto;
+}
+
+.shipsBattle__button > button {
+  padding: 10px 30px;
+  border: 1px solid var(--main-text-color);
+  border-radius: 10px;
+  background-color: inherit;
+  color: inherit;
+  font-size: 20px;
+  margin: 20px auto;
+  transition: all 0.5s linear;
+}
+
+.shipsBattle__button > button:hover {
+  background-color: var(--main-text-color);
+  color: aliceblue;
 }
 
 @media screen and (max-width: 400px) {
