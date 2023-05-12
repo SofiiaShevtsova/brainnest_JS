@@ -66,7 +66,7 @@ const shot = (shotElement) => {
   if (shotElement.classList.contains("ship-green")) {
     shotElement.classList.remove("ship-green");
     shotElement.classList.add("ship-red");
-    return "Good shot"
+    return "Good shot";
   } else {
     shotElement.classList.add("water");
   }
@@ -90,36 +90,42 @@ const onFieldClick = (e) => {
   }
   if (arrayOfField.includes(e.target.id[1])) {
     const userShot = shot(e.target);
-    if (userShot === "Bad shot" || userShot==="Good shot") {
+    if (userShot === "Bad shot" || userShot === "Good shot") {
       return;
     }
   }
   let compShot;
   do {
-    const compChoice = "u" + compChoiceStart().slice(1);
+    let compChoice = "u" + compChoiceStart().slice(1);
     compShot = shot(document.getElementById(`${compChoice}`));
+    if (compShot === "Good shot") {
+      compChoice =
+        compChoice.slice(0, 2) +
+        `${+compChoice.slice(2) === 10 ? 9 : +compChoice.slice(2) + 1}`;
+      compShot = shot(document.getElementById(`${compChoice}`));
+    }
 
     if (battleFieldUser.querySelectorAll(".ship-red").length === 20) {
       alert("Computer win");
       battleFieldComp.removeEventListener("click", onFieldClick);
       playAgain();
-      return
+      return;
     }
     if (battleFieldComp.querySelectorAll(".ship-red").length === 20) {
       alert("User win");
       battleFieldComp.removeEventListener("click", onFieldClick);
       playAgain();
-      return
+      return;
     }
-  } while (compShot === "Bad shot" || compShot==="Good shot");
+  } while (compShot === "Bad shot" || compShot === "Good shot");
 };
 
 const onStartClick = (e) => {
   const choiseItem = [...document.querySelectorAll(".ship-red-bor")];
-      choiseItem.map((item) => {
-        item.classList.remove("ship-red-bor");
-      });
-  
+  choiseItem.map((item) => {
+    item.classList.remove("ship-red-bor");
+  });
+
   compPlayed();
   startButton.classList.add("none");
 

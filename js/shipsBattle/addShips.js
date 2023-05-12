@@ -64,7 +64,7 @@ export const addShipsInField = (startPlace, lang, pos, field) => {
   }
   if (pos === "h") {
     if (
-      (lang === 2 && start.slice(2) === "10") ||
+      (lang === 2 && ["10"].includes(start.slice(2))) ||
       (lang === 3 && ["9", "10"].includes(start.slice(2))) ||
       (lang === 4 && ["8", "9", "10"].includes(start.slice(2)))
     ) {
@@ -79,7 +79,7 @@ export const addShipsInField = (startPlace, lang, pos, field) => {
     return true;
   } else {
     if (
-      (lang === 2 && start.slice(1, 2) === arrayOfField[-1]) ||
+      (lang === 2 && arrayOfField.slice(-1).includes(start.slice(1, 2))) ||
       (lang === 3 && arrayOfField.slice(-2).includes(start.slice(1, 2))) ||
       (lang === 4 && arrayOfField.slice(-3).includes(start.slice(1, 2)))
     ) {

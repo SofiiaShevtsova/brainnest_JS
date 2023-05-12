@@ -254,6 +254,10 @@ main {
   border: 1px solid red;
 }
 
+.ship-red-bor.ship-green{
+  background-color: red;
+}
+
 .shipsBattle__port {
   position: relative;
   min-height: 160px;
