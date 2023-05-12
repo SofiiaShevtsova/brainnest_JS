@@ -66,7 +66,10 @@ const onShipsClick = (e) => {
 
 const playAgain = () => {
   port.classList.remove("none");
-  port.innerHTML = `<a  href="/pages/shipsBattle.html">Play again?</a>`;
+  port.innerHTML = `<button type="button" class="playAgain">Play again?</button>`;
+  port.querySelector(".playAgain").addEventListener("click", () => {
+    location.reload();
+  });
 };
 
 const winAction = () => {

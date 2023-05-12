@@ -338,12 +338,6 @@ main {
   display: none;
 }
 
-.shipsBattle__port > a {
-  color: inherit;
-  font-size: 24px;
-  font-weight: 500;
-}
-
 .shipsBattle__button.none {
   display: none;
 }
@@ -358,7 +352,8 @@ main {
   margin: 20px auto;
 }
 
-.shipsBattle__button > button {
+.shipsBattle__button > button,
+.shipsBattle__port > button {
   padding: 10px 30px;
   border: 1px solid var(--main-text-color);
   border-radius: 10px;
@@ -369,7 +364,8 @@ main {
   transition: all 0.5s linear;
 }
 
-.shipsBattle__button > button:hover {
+.shipsBattle__button > button:hover,
+.shipsBattle__port > button:hover {
   background-color: var(--main-text-color);
   color: aliceblue;
 }
