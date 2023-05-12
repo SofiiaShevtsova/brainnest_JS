@@ -295,32 +295,43 @@ main {
 .shipsBattle__port > div {
   width: 30px;
   height: 30px;
-  background-color: blue;
   cursor: pointer;
+  border: 1px solid blue;
+  border-radius: 5px;
+  background-image: url("../images/ship1.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .shipsBattle__port > #h2 {
   width: 60px;
+  background-image: url("../images/ship2.png");
 }
 
 .shipsBattle__port > #h3 {
   width: 90px;
+  background-image: url("../images/ship3.png");
 }
 
 .shipsBattle__port > #h4 {
   width: 120px;
+  background-image: url("../images/ship4.jpg");
 }
 
 .shipsBattle__port > #v2 {
   height: 60px;
+  background-image: url("../images/shipV2.png");
 }
 
 .shipsBattle__port > #v3 {
   height: 90px;
+  background-image: url("../images/shipV3.png");
 }
 
 .shipsBattle__port > #v4 {
   height: 120px;
+  background-image: url("../images/shipV4.jpg");
 }
 
 .shipsBattle__port > .ship.none {
