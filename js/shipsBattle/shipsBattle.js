@@ -47,7 +47,7 @@ const addField = (isCompFields = false) => {
 
 const AddShips = () => {
   const ships = arrayOfShips
-    .map((i) => `<div class="${i} ship" id="${i}"></div>`)
+    .map((i) => `<div class="${i} ship" id="${i}" draggable="true"></div>`)
     .join(" ");
   return ships;
 };

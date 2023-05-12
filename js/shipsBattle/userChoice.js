@@ -16,7 +16,7 @@ const shipState = {
 let draggedShip = null;
 
 export function dragStart(e) {
-    e.dataTransfer.setDragImage(this, 25, 25);
+  e.dataTransfer.setDragImage(this, 25, 25);
   if (!e.target.id) return;
   if (e.target.id) {
     draggedShip = e.target.id;
