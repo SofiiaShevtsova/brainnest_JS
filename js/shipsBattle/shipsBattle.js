@@ -7,6 +7,7 @@ import {
   dragLeave,
   drop,
 } from "./userChoice.js";
+import { shot } from "./shot.js";
 
 export const arrayOfField = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "k"];
 const arrayOfShips = ["h1", "h2", "h3", "h4"];
@@ -56,22 +57,6 @@ battleFieldUser.insertAdjacentHTML("beforeend", addField());
 battleFieldComp.insertAdjacentHTML("beforeend", addField(true));
 port.insertAdjacentHTML("beforeend", AddShips());
 
-const shot = (shotElement) => {
-  if (
-    shotElement.classList.contains("ship-red") ||
-    shotElement.classList.contains("water")
-  ) {
-    return "Bad shot";
-  }
-  if (shotElement.classList.contains("ship-green")) {
-    shotElement.classList.remove("ship-green");
-    shotElement.classList.add("ship-red");
-    return "Good shot";
-  } else {
-    shotElement.classList.add("water");
-  }
-};
-
 const onShipsClick = (e) => {
   if (e.target.id) {
     e.target.id =
@@ -81,7 +66,12 @@ const onShipsClick = (e) => {
 
 const playAgain = () => {
   port.classList.remove("none");
-  port.innerHTML = `<a  href="./pages/shipsBattle.html">Play again?</a>`;
+  port.innerHTML = `<a  href="/pages/shipsBattle.html">Play again?</a>`;
+};
+
+const winAction = () => {
+  battleFieldComp.removeEventListener("click", onFieldClick);
+  playAgain();
 };
 
 const onFieldClick = (e) => {
@@ -102,19 +92,18 @@ const onFieldClick = (e) => {
       compChoice =
         compChoice.slice(0, 2) +
         `${+compChoice.slice(2) === 10 ? 9 : +compChoice.slice(2) + 1}`;
+
       compShot = shot(document.getElementById(`${compChoice}`));
     }
 
     if (battleFieldUser.querySelectorAll(".ship-red").length === 20) {
       alert("Computer win");
-      battleFieldComp.removeEventListener("click", onFieldClick);
-      playAgain();
+      winAction();
       return;
     }
     if (battleFieldComp.querySelectorAll(".ship-red").length === 20) {
       alert("User win");
-      battleFieldComp.removeEventListener("click", onFieldClick);
-      playAgain();
+      winAction();
       return;
     }
   } while (compShot === "Bad shot" || compShot === "Good shot");
